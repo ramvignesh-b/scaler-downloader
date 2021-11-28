@@ -1,6 +1,6 @@
 # Scaler Downloader
 
-This script woul let you download classroom recordings from Scaler Academy for offline viewing.
+A selenium based python script to download classroom recordings from Scaler Academy, for offline viewing.
 
 ## Prerequisites
 * Chrome _(94-96 recomended)_
@@ -24,8 +24,9 @@ The videos should be downloaded to `<repo_folder>/downloads`
 Happy learning! 🎓
 
 ## TODO
-- [] Rename Downloaded files according to original title
-- [] Re-write in BS4 (research required)
+- [ ] Rename Downloaded files according to original title
+- [ ] Re-write in BS4 (research required 🥵)
+- [ ] Add selective download
 
 Contributions are most welcome 😊
 
