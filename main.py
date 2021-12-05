@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 import json
 import re
 from time import sleep
@@ -10,33 +13,37 @@ import os
 import pathlib
 from download import convert
 
-# Credentials
-EMAIL = input("Enter email: ")
-PASSWORD = getpass.getpass("Enter password: ")
-DOWNLOAD_PATH = str(pathlib.Path(__file__).parent.absolute()) + r"\output\raw\\"
 
-# Driver init
-capabilities = DesiredCapabilities.CHROME
-capabilities["goog:loggingPrefs"] = {"performance": "ALL"}
-chromeOptions = webdriver.ChromeOptions()
-prefs = {"download.default_directory": DOWNLOAD_PATH}
-chromeOptions.add_experimental_option("prefs", prefs)
-chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
-
+CLASSROOM = "https://www.scaler.com/academy/mentee-dashboard/classes/regular"
+MASTERCLASS = "https://www.scaler.com/academy/mentee-dashboard/classes/events/masterclasses"
+DOWNLOAD_PATH = str(pathlib.Path(
+    __file__).parent.absolute()) + r"\output\raw\\"
 DOWNLOAD_PATH = DOWNLOAD_PATH[:-1]
 
+driver = None
 videoLinks = set([])
 name = ''
 
-print("Initiating Chrome Driver...")
 
-driver = webdriver.Chrome(
-    desired_capabilities=capabilities, options=chromeOptions)
+# Driver init
+def init_driver():
+    global driver
+    capabilities = DesiredCapabilities.CHROME
+    capabilities["goog:loggingPrefs"] = {"performance": "ALL"}
+    chromeOptions = webdriver.ChromeOptions()
+    prefs = {"download.default_directory": DOWNLOAD_PATH}
+    chromeOptions.add_experimental_option("prefs", prefs)
+    chromeOptions.add_experimental_option(
+        'excludeSwitches', ['enable-logging'])
+    print("Initiating Chrome Driver...")
+    driver = webdriver.Chrome(
+        desired_capabilities=capabilities, options=chromeOptions)
 
-driver.get("https://www.scaler.com/academy/mentee-dashboard/classes/regular")
-driver.find_element(By.NAME, 'user[email]').send_keys(EMAIL)
-driver.find_element(By.NAME, 'user[password]').send_keys(PASSWORD)
-driver.find_element(By.CSS_SELECTOR, 'button.form__action').click()
+
+def login():
+    driver.find_element(By.NAME, 'user[email]').send_keys(EMAIL)
+    driver.find_element(By.NAME, 'user[password]').send_keys(PASSWORD)
+    driver.find_element(By.CSS_SELECTOR, 'button.form__action').click()
 
 
 def process_log(logs):
@@ -46,21 +53,31 @@ def process_log(logs):
             yield log
 
 
-def download(link):
+def download(link, _type):
     global name
     driver.get(link)
-    sleep(2)
-    try:
-        recordBtn = driver.find_element(
-            By.CSS_SELECTOR, '.event-card__content-last-button-container')
-    except:
-        return False
-    if recordBtn.text != 'Watch Recording':
-        return False
-    title = driver.find_element(
-        By.CSS_SELECTOR, 'div.event-card__content-header')
-    recordBtn.click()
-    sleep(3)
+    if _type == 'master':
+        try:
+            element_present = EC.presence_of_element_located(
+            (By.CSS_SELECTOR, '.m-header__title'))
+            WebDriverWait(driver, 5).until(element_present)
+        except TimeoutException:
+            return False
+        title = driver.find_element(
+            By.CSS_SELECTOR, '.m-header__title')
+    else:
+        sleep(2)
+        try:
+            recordBtn = driver.find_element(
+                By.CSS_SELECTOR, '.event-card__content-last-button-container')
+        except:
+            return False
+        if recordBtn.text != 'Watch Recording':
+            return False
+        title = driver.find_element(
+            By.CSS_SELECTOR, 'div.event-card__content-header')
+        recordBtn.click()
+    sleep(4)
     events = process_log(driver.get_log("performance"))
     for event in events:
         try:
@@ -81,7 +98,6 @@ def download(link):
             print("-", url)
             params = url.split('/')
             if params[2] != "www.scaler.com":
-                print("Host -> cloudfront")
                 hashd = params[7]
                 hashd = hashd[:-5]
             else:
@@ -89,7 +105,7 @@ def download(link):
             with open("output/hash.txt", 'a') as output:
                 output.write(f"{title.text} || {hashd}\n")
             sleep(2)
-            dest = f"{DOWNLOAD_PATH}__{hashd}"
+            dest = f"{DOWNLOAD_PATH}{hashd}"
             if not os.path.exists(dest):
                 os.makedirs(dest)
             files = os.listdir(DOWNLOAD_PATH)
@@ -101,42 +117,84 @@ def download(link):
                         if os.path.exists(DOWNLOAD_PATH + g):
                             os.remove(DOWNLOAD_PATH + g)
                     sleep(1)
-            return True
-    return False
+    return True
 
 
-def download_source():
+def clear_files(_file):
+    with open(f"output/{_file}.txt", 'w') as output:
+        output.write(f"")
+
+
+def download_classroom():
+    clear_files('hash')
+    clear_files('failed')
+    driver.get(CLASSROOM)
+    login()
     success = 0
-    sleep(2)
+    element_present = EC.presence_of_element_located(
+            (By.CLASS_NAME, 'icon-plus-circle'))
+    WebDriverWait(driver, 2).until(element_present)
     icons = driver.find_elements(By.CLASS_NAME, 'icon-plus-circle')
     for i in icons:
         i.click()
     elements = driver.find_elements(By.CLASS_NAME, 'me-cr-classroom-url')
     links = [elem.get_attribute('href') for elem in elements]
     links.reverse()
-    print("Fetched items from 'All Classroom'....")
+    print(f"Fetched {len(links)} items from 'All Classroom'....")
     for link in links:
-        ops = download(link)
+        ops = download(link, 'class')
         if ops:
             print(f"Successfully downloaded {name}!")
             success += 1
     print("=========================")
-    print("Done: ", success, " video links")
+    print(f"Downloaded: {success} video links")
 
-hashList = set([])
 
-def check_hash(title):
-    flag = 0
-    for _hash in hashList:
-        if title == _hash:
-            flag = 1
-            break
-    if flag:
-        return False
-    return True
+def download_master():
+    clear_files('hash')
+    clear_files('failed')
+    driver.get(MASTERCLASS)
+    login()
+    success = 0
+    failed = 0
+    sleep(2)
+    elements = driver.find_elements(By.CLASS_NAME, 'day__link')
+    links = [elem.get_attribute('href') for elem in elements]
+    print(f"Fetched {len(links)} items from 'Masterclass'....")
+    for link in links:
+        ops = download(link, 'master')
+        if ops:
+            print(f"Successfully downloaded {name}!")
+            success += 1
+        else:
+            failed += 1
+            with open("output/failed.txt", 'a') as failed:
+                failed.write("{link}\n")
+    print("=========================")
+    print(f"Success: {success}; Failed: {failed}")
 
 
 if __name__ == '__main__':
     print("=========================")
-    download_source()
-    convert()
+    global EMAIL, PASSWORD
+    EMAIL = input("Enter email: ")
+    PASSWORD = getpass.getpass("Enter password: ")
+    init_driver()
+    while True:
+        print("1. Classroom")
+        print("2. Masterclass")
+        print("0. Exit")
+        print("=========================")
+        choice = int(input("Choice: "))
+        if choice == 1:
+            download_classroom()
+        elif choice == 2:
+            download_master()
+        else:
+            exit(1)
+        print("=========================")
+        choice = input("Do you want to convert? y/n")
+        if choice.lower() == 'y':
+            convert()
+        else:
+            exit(2)
