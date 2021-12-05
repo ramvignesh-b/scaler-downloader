@@ -1,1 +1,118 @@
 Dare to Dream || 976bbcee49894e03ad32565eee3634ac
+Dare to Dream || 976bbcee49894e03ad32565eee3634ac
+Dare to Dream || 976bbcee49894e03ad32565eee3634ac
+Dare to Dream || 9f08636162bd4ca6b6a33314a9ab5224
+Dare to Dream || 9f08636162bd4ca6b6a33314a9ab5224
+High Level Design - Basics || fd1633faf5ec44d48def947dd6c3d621
+High Level Design - Basics || fd1633faf5ec44d48def947dd6c3d621
+Low Level Design - Basics || 93a5851d4b6f478d96160b5ef8cd3efe
+Low Level Design - Basics || 93a5851d4b6f478d96160b5ef8cd3efe
+Introduction to Problem Solving || 4bc663de2ae74d2596ec0821fd9e71a4
+Introduction to Problem Solving || 4bc663de2ae74d2596ec0821fd9e71a4
+Introduction to Number System and Bit Manipulation || db0f450e7b07462ba8a6e860174c6c86
+Introduction to Number System and Bit Manipulation || db0f450e7b07462ba8a6e860174c6c86
+Introduction to Time Complexity Analysis || fe584bfc3dd64925bc28229f81b068a4
+Introduction to Time Complexity Analysis || fe584bfc3dd64925bc28229f81b068a4
+Bit Manipulations and Time Complexity || 0f175c07483a41eaa990b87c5d18eb6e
+Bit Manipulations and Time Complexity || 0f175c07483a41eaa990b87c5d18eb6e
+Bit Manipulations and Time Complexity || 0f175c07483a41eaa990b87c5d18eb6e
+Arrays & Dynamic Arrays || dbe65858d0354766aa25d05d6e5b0e9c
+Arrays & Dynamic Arrays || dbe65858d0354766aa25d05d6e5b0e9c
+Arrays & Dynamic Arrays || dbe65858d0354766aa25d05d6e5b0e9c
+Multidimensional Arrays || 7dc884ca30134696965f5ae6a6c21161
+Multidimensional Arrays || 7dc884ca30134696965f5ae6a6c21161
+Multidimensional Arrays || 7dc884ca30134696965f5ae6a6c21161
+Doubt Session || d1119cdf878e474ca97b07329ea20be4
+Doubt Session || d1119cdf878e474ca97b07329ea20be4
+Doubt Session || d1119cdf878e474ca97b07329ea20be4
+Problems on Arrays || 30fd1fca4a7940a48f70d3869f559cf3
+Problems on Arrays || 30fd1fca4a7940a48f70d3869f559cf3
+Problems on Arrays || 30fd1fca4a7940a48f70d3869f559cf3
+Introduction to Hashing || 3d37358bdf3f4aeea028559e4bf38a92
+Introduction to Hashing || 3d37358bdf3f4aeea028559e4bf38a92
+Introduction to Hashing || 3d37358bdf3f4aeea028559e4bf38a92
+More Problems on Hashing || 7da2ccf665d74f5da1ba7c0940481e41
+More Problems on Hashing || 7da2ccf665d74f5da1ba7c0940481e41
+More Problems on Hashing || 7da2ccf665d74f5da1ba7c0940481e41
+Introduction to Sorting || 8b84add533e848e9a8fd3f2e16f231bf
+Introduction to Sorting || 8b84add533e848e9a8fd3f2e16f231bf
+Introduction to Sorting || 8b84add533e848e9a8fd3f2e16f231bf
+String Manipulation || 1fd1487698b54656a0c79ae4792afdf8
+String Manipulation || 1fd1487698b54656a0c79ae4792afdf8
+String Manipulation || 1fd1487698b54656a0c79ae4792afdf8
+Introduction to Recursion || 9127a6c8b4224466a7c5a0fc4bd90be1
+Introduction to Recursion || 9127a6c8b4224466a7c5a0fc4bd90be1
+Introduction to Recursion || 9127a6c8b4224466a7c5a0fc4bd90be1
+Hashing Remedial || 7a90231fa117400ebba2ba401398e9ec
+Hashing Remedial || 7a90231fa117400ebba2ba401398e9ec
+Hashing Remedial || 7a90231fa117400ebba2ba401398e9ec
+Basics of Maths || 982e94de65ef4e3882cc23c9bd42ecc9
+Basics of Maths || 982e94de65ef4e3882cc23c9bd42ecc9
+Basics of Maths || 982e94de65ef4e3882cc23c9bd42ecc9
+Basics of Maths - 2 || 80f79c398da74a649f2d4b6eb4915b5f
+Basics of Maths - 2 || 80f79c398da74a649f2d4b6eb4915b5f
+Basics of Maths - 2 || 80f79c398da74a649f2d4b6eb4915b5f
+Problem Solving 1 || f0aa00cf01c64c258e22030027eecc84
+Problem Solving 1 || f0aa00cf01c64c258e22030027eecc84
+Problem Solving 1 || f0aa00cf01c64c258e22030027eecc84
+Problem Solving 2 || f06ce0f8c21d4fffb44c509874b51460
+Problem Solving 2 || f06ce0f8c21d4fffb44c509874b51460
+Problem Solving 2 || f06ce0f8c21d4fffb44c509874b51460
+Problem Solving 3 || b1029f4eced040bebbab0da95430aebc
+Problem Solving 3 || b1029f4eced040bebbab0da95430aebc
+Problem Solving 3 || b1029f4eced040bebbab0da95430aebc
+Problem Solving 4 || d8d9e7769a1243fcb32aaa77de60ece3
+Problem Solving 4 || d8d9e7769a1243fcb32aaa77de60ece3
+Problem Solving 4 || d8d9e7769a1243fcb32aaa77de60ece3
+Problem Solving 5 || 3f07d744c9824723a08ed8bc7e9b4e4a
+Problem Solving 5 || 3f07d744c9824723a08ed8bc7e9b4e4a
+Problem Solving 5 || 3f07d744c9824723a08ed8bc7e9b4e4a
+Problem Solving 6 || 7063c4e0c2254aa98f1bb80677598884
+Problem Solving 6 || 7063c4e0c2254aa98f1bb80677598884
+Problem Solving 6 || 7063c4e0c2254aa98f1bb80677598884
+Problem Solving 7 || 4476fc6e7be54238b41cbefa7ec2bb92
+Problem Solving 7 || 4476fc6e7be54238b41cbefa7ec2bb92
+Problem Solving 7 || 4476fc6e7be54238b41cbefa7ec2bb92
+Basics of Storage || bf252388a3a54674be729dd8d02eec0f
+Basics of Storage || bf252388a3a54674be729dd8d02eec0f
+Basics of Storage || bf252388a3a54674be729dd8d02eec0f
+How internet works || e5c7cbaf475e4ccebce4a7d2a40d9408
+How internet works || e5c7cbaf475e4ccebce4a7d2a40d9408
+How internet works || e5c7cbaf475e4ccebce4a7d2a40d9408
+Remedial - Problem Solving || 6f27279e721649779cbacc0c8e4dc28c
+Remedial - Problem Solving || 6f27279e721649779cbacc0c8e4dc28c
+Remedial - Problem Solving || 6f27279e721649779cbacc0c8e4dc28c
+Maths - Remedial || eff688d17cd94107af21905169e6deb1
+Maths - Remedial || eff688d17cd94107af21905169e6deb1
+Maths - Remedial || eff688d17cd94107af21905169e6deb1
+Arrays & Dynamic Arrays || 859029c18640126f9325d3a0af530aab_86070
+Arrays 2 || 0a97d8c2e198453c8160134ee8271811
+Arrays 2 || 0a97d8c2e198453c8160134ee8271811
+Arrays 2 || 0a97d8c2e198453c8160134ee8271811
+Maths - Modular Arithmetic || ec22d181f24d57311fe7a6afd6c86390_88347
+Maths : GCD || e82522439e49478239cb3d8700c9dda7_89167
+Maths : Prime numbers || 0bcec5dd102043b98d653df745c43c80
+Maths : Prime numbers || 0bcec5dd102043b98d653df745c43c80
+Maths - Combinatorics || c3fc2f55814d18414e1a4a872a4bb221_94000
+Bit Manipulation || 90fd8a1cba994633ba755565aca0b93c
+Bit Manipulation || 90fd8a1cba994633ba755565aca0b93c
+Bit Manipulation || 90fd8a1cba994633ba755565aca0b93c
+Recursion + Backtracking || 0db5f6ee9e2241c0877664a560dc99ef
+Recursion + Backtracking || 0db5f6ee9e2241c0877664a560dc99ef
+Backtracking 1 || dcb76bf403f04df08d4f147e96af5147
+Backtracking 1 || dcb76bf403f04df08d4f147e96af5147
+Backtracking 1 || dcb76bf403f04df08d4f147e96af5147
+Backtracking 2 || b52d60d3904208debd57869624b5c08e_98306
+Sorting 1 || 945130f27e064fc19c17f619efd60746
+Sorting 1 || 945130f27e064fc19c17f619efd60746
+Sorting 1 || 945130f27e064fc19c17f619efd60746
+Sorting 2 || a4daa1d8e848430ee1abe394060fdf54_101020
+Searching I || 362bb45bb7421d09884c05846f13749a_101965
+Searching II || 56eb3f8c4a9a471b8364775c586c43f1
+Searching II || 56eb3f8c4a9a471b8364775c586c43f1
+Searching II || 56eb3f8c4a9a471b8364775c586c43f1
+Two Pointers || bdf46935974e18efefaa33837ccc88a8_104275
+Hashing 1 || 706bb8b2864ab883d53736a976ee0ebe_105327
+Hashing 2 || 40a0ea701d59463ca045b684e7eb394d
+Hashing 2 || 40a0ea701d59463ca045b684e7eb394d
+Hashing 2 || 40a0ea701d59463ca045b684e7eb394d

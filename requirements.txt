@@ -1,3 +1,4 @@
 selenium
+art
 json
 youtube-dl

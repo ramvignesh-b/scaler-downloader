@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import json
 import re
+from art import tprint
 from time import sleep
 import getpass
 import shutil
@@ -22,6 +23,8 @@ DOWNLOAD_PATH = DOWNLOAD_PATH[:-1]
 
 driver = None
 videoLinks = set([])
+titleSet = set([])
+hashSet = set([])
 name = ''
 
 
@@ -49,7 +52,7 @@ def login():
 def process_log(logs):
     for entry in logs:
         log = json.loads(entry["message"])["message"]
-        if "Network.response" in log["method"]:
+        if "Network.responseReceived" in log["method"]:
             yield log
 
 
@@ -58,26 +61,27 @@ def download(link, _type):
     driver.get(link)
     if _type == 'master':
         try:
-            element_present = EC.presence_of_element_located(
-            (By.CSS_SELECTOR, '.m-header__title'))
-            WebDriverWait(driver, 5).until(element_present)
+            WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, '.m-header__title')))
         except TimeoutException:
             return False
         title = driver.find_element(
             By.CSS_SELECTOR, '.m-header__title')
     else:
-        sleep(2)
         try:
+            WebDriverWait(driver, 2).until(EC.presence_of_element_located(
+                (By.CSS_SELECTOR, '.event-card__content-last-button-container')))
             recordBtn = driver.find_element(
                 By.CSS_SELECTOR, '.event-card__content-last-button-container')
-        except:
+        except TimeoutException:
             return False
         if recordBtn.text != 'Watch Recording':
             return False
         title = driver.find_element(
             By.CSS_SELECTOR, 'div.event-card__content-header')
         recordBtn.click()
-    sleep(4)
+    # Waiting for all the live m3u8 files to process
+    sleep(7)
     events = process_log(driver.get_log("performance"))
     for event in events:
         try:
@@ -95,16 +99,18 @@ def download(link, _type):
             videoLinks.add(url)
             name = title.text
             driver.get(url)
-            print("-", url)
             params = url.split('/')
             if params[2] != "www.scaler.com":
                 hashd = params[7]
                 hashd = hashd[:-5]
             else:
                 hashd = params[4]
+            titleSet.add(title)
+            hashSet.add(hashd)
             with open("output/hash.txt", 'a') as output:
                 output.write(f"{title.text} || {hashd}\n")
-            sleep(2)
+            # wait for download to complete
+            sleep(3)
             dest = f"{DOWNLOAD_PATH}{hashd}"
             if not os.path.exists(dest):
                 os.makedirs(dest)
@@ -114,8 +120,7 @@ def download(link, _type):
                     try:
                         shutil.move(DOWNLOAD_PATH + g, dest)
                     except:
-                        if os.path.exists(DOWNLOAD_PATH + g):
-                            os.remove(DOWNLOAD_PATH + g)
+                        pass
                     sleep(1)
     return True
 
@@ -131,14 +136,14 @@ def download_classroom():
     driver.get(CLASSROOM)
     login()
     success = 0
-    element_present = EC.presence_of_element_located(
-            (By.CLASS_NAME, 'icon-plus-circle'))
-    WebDriverWait(driver, 2).until(element_present)
+    WebDriverWait(driver, 3).until(EC.presence_of_element_located(
+        (By.CLASS_NAME, 'icon-plus-circle')))
     icons = driver.find_elements(By.CLASS_NAME, 'icon-plus-circle')
     for i in icons:
         i.click()
     elements = driver.find_elements(By.CLASS_NAME, 'me-cr-classroom-url')
-    links = [elem.get_attribute('href') for elem in elements]
+    hrefs = [elem.get_attribute('href') for elem in elements]
+    links = list(filter(lambda x: 'session' in x, hrefs))
     links.reverse()
     print(f"Fetched {len(links)} items from 'All Classroom'....")
     for link in links:
@@ -146,7 +151,7 @@ def download_classroom():
         if ops:
             print(f"Successfully downloaded {name}!")
             success += 1
-    print("=========================")
+    print("==================================================")
     print(f"Downloaded: {success} video links")
 
 
@@ -170,12 +175,19 @@ def download_master():
             failed += 1
             with open("output/failed.txt", 'a') as failed:
                 failed.write("{link}\n")
-    print("=========================")
+    print("==================================================")
     print(f"Success: {success}; Failed: {failed}")
 
 
+def title_hash_pair():
+    with open("output/pair.txt", 'w') as pair:
+        for _title,_hash in zip(titleSet, hashSet):
+            pair.write(f"{_title} || {_hash}\n")
+
+
 if __name__ == '__main__':
-    print("=========================")
+    tprint("Scaler Downloader",font="cybermedium")
+    print("==================================================")
     global EMAIL, PASSWORD
     EMAIL = input("Enter email: ")
     PASSWORD = getpass.getpass("Enter password: ")
@@ -184,7 +196,7 @@ if __name__ == '__main__':
         print("1. Classroom")
         print("2. Masterclass")
         print("0. Exit")
-        print("=========================")
+        print("==================================================")
         choice = int(input("Choice: "))
         if choice == 1:
             download_classroom()
@@ -192,8 +204,9 @@ if __name__ == '__main__':
             download_master()
         else:
             exit(1)
-        print("=========================")
-        choice = input("Do you want to convert? y/n")
+        title_hash_pair()
+        print("==================================================")
+        choice = input("Do you want to convert? y/n >")
         if choice.lower() == 'y':
             convert()
         else:
