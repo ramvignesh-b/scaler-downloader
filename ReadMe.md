@@ -24,6 +24,7 @@ The videos should be downloaded to `<repo_folder>/downloads`
 Happy learning! 🎓
 
 ## TODO
+- [x] Add masterclass download option
 - [ ] Rename Downloaded files according to original title
 - [ ] Re-write in BS4 (research required 🥵)
 - [ ] Add selective download
