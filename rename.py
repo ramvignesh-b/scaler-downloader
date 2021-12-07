@@ -1,4 +1,3 @@
-
 import os
 import pathlib
 
@@ -18,15 +17,21 @@ def rename_dir():
                 continue
             else:
                 hashList.append(pair)
+    count = 0
     for _dir in dirList:
         for _hash in hashList:
             if _dir == _hash[1]:
                 try:
                     os.rename(f"{DOWNLOAD_PATH}{_dir}", f"{DOWNLOAD_PATH}{_hash[0]}")
+                    count += 1
                     print(_hash[0])
                 except:
-                    break
+                    pass
                 break
+    if count:
+        print(f"Renamed {count} folders!")
+    else:
+        print(f"No folders to rename!")
 
 
 if __name__ == "__main__":

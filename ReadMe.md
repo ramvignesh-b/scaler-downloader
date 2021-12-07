@@ -24,7 +24,7 @@ The videos should be downloaded to `<repo_folder>/downloads`
 Happy learning! 🎓
 
 ## TODO
-- [ ] Rename Downloaded files according to original title
+- [x] Rename Downloaded files according to original title
 - [ ] Re-write in BS4 (research required 🥵)
 - [ ] Add selective download
 

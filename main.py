@@ -13,6 +13,7 @@ import shutil
 import os
 import pathlib
 from download import convert
+from rename import rename_dir
 
 
 CLASSROOM = "https://www.scaler.com/academy/mentee-dashboard/classes/regular"
@@ -193,21 +194,35 @@ if __name__ == '__main__':
     PASSWORD = getpass.getpass("Enter password: ")
     init_driver()
     while True:
-        print("1. Classroom")
-        print("2. Masterclass")
-        print("0. Exit")
-        print("==================================================")
-        choice = int(input("Choice: "))
+        print("What do you want me to do?")
+        print("1. Download videos")
+        print("2. Rename hashes")
+        print("3. Convert videos")
+        choice = int(input("> "))
         if choice == 1:
-            download_classroom()
+            print("==================================================")
+            print("What do you want to download?")
+            print("1. Classroom")
+            print("2. Masterclass")
+            print("==================================================")
+            choice = int(input("> "))
+            if choice == 1:
+                download_classroom()
+            elif choice == 2:
+                download_master()
+            else:
+                exit(1)
+            title_hash_pair()
+            print("==================================================")
+            choice = input("Do you want to rename and convert? y/n >")
+            if choice.lower() == 'y':
+                rename_dir()
+                convert()
+            else:
+                exit(2)
         elif choice == 2:
-            download_master()
-        else:
-            exit(1)
-        title_hash_pair()
-        print("==================================================")
-        choice = input("Do you want to convert? y/n >")
-        if choice.lower() == 'y':
+            rename_dir()
+        elif choice == 3:
             convert()
         else:
-            exit(2)
+            exit(1)
