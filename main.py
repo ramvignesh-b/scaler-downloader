@@ -182,7 +182,7 @@ def download_master():
 
 def title_hash_pair():
     with open("output/pair.txt", 'w') as pair:
-        for _title,_hash in zip(titleSet, hashSet):
+        for _title, _hash in zip(titleSet, hashSet):
             pair.write(f"{_title} || {_hash}\n")
 
 

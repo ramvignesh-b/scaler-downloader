@@ -10,8 +10,8 @@ def rename_dir():
     with open("output/hash.txt") as hashFile:
         hashPair = hashFile.readlines()
         for hashes in hashPair:
-            pair = hashes.strip("\n").replace(':', '-').split(" || ")
-            if hashList == []:
+            pair = hashes.strip("\n").replace(':', '-').replace('&', ' ').split(" || ")
+            if not hashList:
                 hashList.append(pair)
             elif hashList[-1][1] == pair[1]:
                 continue
